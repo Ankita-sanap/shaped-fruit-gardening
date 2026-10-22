@@ -1,0 +1,1286 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Shaped Fruit Gardening helps curious growers turn ordinary harvests into extraordinary fruit.">
+  <meta name="theme-color" content="#143b2d">
+  <title>Shaped Fruit Gardening — Grow the unexpected</title>
+  <style>
+    :root {
+      --forest: #143b2d;
+      --forest-deep: #0c2b20;
+      --leaf: #377d52;
+      --mint: #cfead8;
+      --cream: #fff9ee;
+      --paper: #fffdf8;
+      --coral: #ef6a50;
+      --coral-dark: #d9533c;
+      --yellow: #f5c84c;
+      --plum: #412941;
+      --ink: #183127;
+      --muted: #587063;
+      --line: #d9e3d8;
+      --shadow: 0 22px 50px rgba(20, 59, 45, .13);
+      --round: 24px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--cream);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+      overflow-x: hidden;
+    }
+    body.menu-open { overflow: hidden; }
+    a { color: inherit; text-decoration: none; }
+    button, input, select { font: inherit; }
+    button { cursor: pointer; }
+    img, svg { display: block; max-width: 100%; }
+    :focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .shell { width: min(var(--max), calc(100% - 40px)); margin-inline: auto; }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .55rem;
+      margin: 0 0 1rem;
+      color: var(--leaf);
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before {
+      width: 22px;
+      height: 2px;
+      background: currentColor;
+      content: "";
+    }
+    .section-heading {
+      display: grid;
+      grid-template-columns: minmax(0, 620px) minmax(220px, 1fr);
+      gap: 2rem;
+      align-items: end;
+      margin-bottom: 2.75rem;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1, h2, h3 {
+      font-family: Georgia, "Times New Roman", serif;
+      letter-spacing: -.045em;
+      line-height: 1.02;
+    }
+    h2 { margin-bottom: 0; font-size: clamp(2.15rem, 4.8vw, 4.25rem); }
+    .section-heading p { color: var(--muted); margin: 0 0 .35rem; max-width: 35rem; }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .6rem;
+      min-height: 50px;
+      padding: .78rem 1.2rem;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      font-weight: 800;
+      transition: transform .22s ease, background .22s ease, color .22s ease, box-shadow .22s ease;
+    }
+    .button:hover { transform: translateY(-2px); }
+    .button-primary { color: #fff; background: var(--forest); box-shadow: 0 10px 18px rgba(20, 59, 45, .16); }
+    .button-primary:hover { background: var(--forest-deep); box-shadow: 0 14px 24px rgba(20, 59, 45, .22); }
+    .button-light { color: var(--forest); background: #fff; border-color: #fff; }
+    .button-light:hover { color: var(--forest-deep); background: var(--yellow); border-color: var(--yellow); }
+    .button-outline { color: var(--forest); background: transparent; border-color: currentColor; }
+    .button-outline:hover { background: rgba(20, 59, 45, .08); }
+    .button-small { min-height: 40px; padding: .52rem .95rem; font-size: .88rem; }
+
+    /* Header */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      border-bottom: 1px solid rgba(20, 59, 45, .08);
+      background: rgba(255, 249, 238, .86);
+      backdrop-filter: blur(14px);
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 74px;
+      gap: 1.2rem;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: .72rem;
+      color: var(--forest);
+      font-weight: 900;
+      line-height: 1.02;
+      letter-spacing: -.025em;
+    }
+    .brand-mark {
+      display: grid;
+      width: 38px;
+      height: 38px;
+      place-items: center;
+      border-radius: 50% 50% 45% 45%;
+      color: #fff;
+      background: var(--coral);
+      box-shadow: inset -5px -5px 0 rgba(130, 32, 34, .12);
+    }
+    .brand-mark svg { width: 24px; height: 24px; }
+    .brand-name { font-size: 1.02rem; }
+    .brand-name small { display: block; margin-top: .1rem; font-size: .59rem; letter-spacing: .12em; text-transform: uppercase; }
+    .nav-links { display: flex; align-items: center; gap: .25rem; }
+    .nav-links a {
+      padding: .6rem .78rem;
+      color: var(--muted);
+      border-radius: 999px;
+      font-size: .92rem;
+      font-weight: 750;
+    }
+    .nav-links a:hover { color: var(--forest); background: rgba(55, 125, 82, .1); }
+    .nav-cta { display: flex; align-items: center; gap: .7rem; }
+    .plan-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      min-height: 40px;
+      padding: .45rem .75rem;
+      color: var(--forest);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--paper);
+      font-size: .83rem;
+      font-weight: 800;
+    }
+    .plan-count {
+      display: grid;
+      width: 20px;
+      height: 20px;
+      place-items: center;
+      color: #fff;
+      border-radius: 50%;
+      background: var(--coral);
+      font-size: .7rem;
+    }
+    .menu-toggle {
+      display: none;
+      width: 42px;
+      height: 42px;
+      padding: 0;
+      color: var(--forest);
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: var(--paper);
+    }
+    .menu-toggle span, .menu-toggle::before, .menu-toggle::after {
+      display: block;
+      width: 18px;
+      height: 2px;
+      margin: 4px auto;
+      border-radius: 99px;
+      background: currentColor;
+      content: "";
+      transition: transform .2s ease, opacity .2s ease;
+    }
+    .menu-toggle[aria-expanded="true"] span { opacity: 0; }
+    .menu-toggle[aria-expanded="true"]::before { transform: translateY(6px) rotate(45deg); }
+    .menu-toggle[aria-expanded="true"]::after { transform: translateY(-6px) rotate(-45deg); }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      padding: clamp(4rem, 8vw, 7rem) 0 4.1rem;
+      background:
+        radial-gradient(circle at 76% 29%, rgba(245, 200, 76, .58) 0 10%, transparent 10.1%),
+        radial-gradient(circle at 78% 29%, rgba(245, 200, 76, .13) 0 25%, transparent 25.1%),
+        linear-gradient(116deg, #e4f0dd 0%, #d7ecd9 54%, #c7e6ce 100%);
+    }
+    .hero::before {
+      position: absolute;
+      z-index: -1;
+      right: -13rem;
+      bottom: -22rem;
+      width: 47rem;
+      height: 47rem;
+      border: 1px solid rgba(55, 125, 82, .15);
+      border-radius: 47% 53% 55% 45%;
+      content: "";
+      transform: rotate(21deg);
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, .95fr) minmax(440px, .95fr);
+      gap: clamp(2.3rem, 5vw, 5.7rem);
+      align-items: center;
+    }
+    .hero-copy { padding: 1rem 0; }
+    .hero h1 {
+      max-width: 650px;
+      margin-bottom: 1.25rem;
+      color: var(--forest-deep);
+      font-size: clamp(3.3rem, 7.1vw, 6.5rem);
+    }
+    .hero h1 em {
+      position: relative;
+      color: var(--coral);
+      font-style: normal;
+      white-space: nowrap;
+    }
+    .hero h1 em::after {
+      position: absolute;
+      right: 0;
+      bottom: -.05em;
+      left: 0;
+      height: .13em;
+      border-radius: 99px;
+      background: var(--yellow);
+      content: "";
+      z-index: -1;
+      transform: rotate(-2deg);
+    }
+    .hero-text { max-width: 34rem; margin-bottom: 1.8rem; color: var(--muted); font-size: 1.08rem; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: .75rem; }
+    .hero-note {
+      display: flex;
+      align-items: center;
+      gap: .85rem;
+      margin-top: 2.4rem;
+      color: #3a5b49;
+      font-size: .88rem;
+      font-weight: 750;
+    }
+    .avatar-stack { display: flex; padding-left: .4rem; }
+    .avatar-stack span {
+      display: grid;
+      width: 28px;
+      height: 28px;
+      margin-left: -.4rem;
+      place-items: center;
+      border: 2px solid #e0efde;
+      border-radius: 50%;
+      background: var(--forest);
+      color: #fff;
+      font-size: .63rem;
+    }
+    .avatar-stack span:nth-child(2) { background: var(--coral); }
+    .avatar-stack span:nth-child(3) { background: #6a914b; }
+    .hero-art {
+      position: relative;
+      min-height: 465px;
+      animation: float-art 7s ease-in-out infinite;
+    }
+    .hero-art::before {
+      position: absolute;
+      inset: 11% 6% 4% 7%;
+      border: 1px solid rgba(20, 59, 45, .1);
+      border-radius: 42% 58% 42% 58%;
+      background: rgba(255, 253, 248, .28);
+      content: "";
+      transform: rotate(-9deg);
+    }
+    .hero-art::after {
+      position: absolute;
+      right: 5%;
+      bottom: 7%;
+      width: 145px;
+      height: 55px;
+      border-radius: 50%;
+      background: rgba(22, 69, 46, .17);
+      content: "";
+      filter: blur(15px);
+    }
+    .fruit-illustration {
+      position: absolute;
+      z-index: 1;
+      filter: drop-shadow(0 20px 18px rgba(20, 59, 45, .17));
+    }
+    .fruit-heart { top: 5%; right: 19%; width: 280px; transform: rotate(9deg); }
+    .fruit-star { right: 2%; bottom: 9%; width: 175px; transform: rotate(14deg); }
+    .fruit-cube { bottom: 3%; left: 7%; width: 190px; transform: rotate(-11deg); }
+    .art-label {
+      position: absolute;
+      z-index: 4;
+      display: flex;
+      align-items: center;
+      gap: .55rem;
+      padding: .7rem .9rem;
+      border: 1px solid rgba(255, 255, 255, .72);
+      border-radius: 14px;
+      background: rgba(255, 253, 248, .9);
+      box-shadow: 0 12px 26px rgba(20, 59, 45, .12);
+      color: var(--forest);
+      font-size: .77rem;
+      font-weight: 850;
+      backdrop-filter: blur(10px);
+    }
+    .art-label.one { top: 13%; left: 4%; }
+    .art-label.two { right: 1%; bottom: 39%; }
+    .art-label b { color: var(--coral); font-size: 1.08rem; }
+    @keyframes float-art {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-9px); }
+    }
+
+    .proof-strip { background: var(--forest); color: #f4f8ee; }
+    .proof-list {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      align-items: center;
+      min-height: 96px;
+      gap: 1rem;
+    }
+    .proof-list div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .6rem;
+      color: #d2e5d7;
+      font-size: .9rem;
+      font-weight: 750;
+      text-align: center;
+    }
+    .proof-list svg { width: 25px; height: 25px; color: var(--yellow); flex: 0 0 auto; }
+
+    /* Sections */
+    .section { padding: clamp(4.8rem, 9vw, 8.4rem) 0; }
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 2rem;
+      align-items: stretch;
+    }
+    .intro-copy {
+      padding: clamp(1.6rem, 4vw, 3.15rem);
+      border-radius: var(--round);
+      background: var(--paper);
+      box-shadow: var(--shadow);
+    }
+    .intro-copy h2 { max-width: 12ch; margin-bottom: 1.25rem; font-size: clamp(2.1rem, 4.2vw, 3.7rem); }
+    .intro-copy p { max-width: 34rem; color: var(--muted); }
+    .micro-points { display: grid; gap: .7rem; margin: 1.7rem 0 0; padding: 0; list-style: none; }
+    .micro-points li { display: flex; gap: .7rem; align-items: center; font-weight: 750; }
+    .micro-points li::before {
+      display: grid;
+      width: 22px;
+      height: 22px;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--mint);
+      color: var(--forest);
+      content: "✓";
+      font-size: .75rem;
+      font-weight: 900;
+    }
+    .reason-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+    .reason-card {
+      min-height: 184px;
+      padding: 1.35rem;
+      border-radius: 20px;
+    }
+    .reason-card:nth-child(1) { color: #fff; background: var(--coral); }
+    .reason-card:nth-child(2) { background: var(--yellow); }
+    .reason-card:nth-child(3) { color: #fff; background: var(--plum); }
+    .reason-card:nth-child(4) { background: var(--mint); }
+    .reason-card svg { width: 42px; height: 42px; margin-bottom: 1.35rem; }
+    .reason-card strong { display: block; font-family: Georgia, "Times New Roman", serif; font-size: 1.32rem; letter-spacing: -.04em; line-height: 1.05; }
+    .reason-card span { display: block; margin-top: .45rem; font-size: .85rem; font-weight: 650; opacity: .82; }
+
+    /* Collection */
+    .shape-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.35rem; }
+    .shape-card {
+      position: relative;
+      display: flex;
+      min-height: 470px;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1.55rem;
+      overflow: hidden;
+      border: 1px solid rgba(20, 59, 45, .08);
+      border-radius: var(--round);
+      background: var(--paper);
+      text-align: left;
+      transition: transform .28s ease, box-shadow .28s ease;
+    }
+    .shape-card:hover { transform: translateY(-7px); box-shadow: var(--shadow); }
+    .shape-card:focus-within { box-shadow: 0 0 0 4px rgba(245, 200, 76, .8), var(--shadow); }
+    .shape-card::before {
+      position: absolute;
+      top: -2.4rem;
+      right: -1.8rem;
+      width: 19rem;
+      height: 19rem;
+      border-radius: 49% 51% 46% 54%;
+      content: "";
+      transform: rotate(-13deg);
+    }
+    .shape-card.heart::before { background: #ffd6cb; }
+    .shape-card.star::before { background: #d8edd1; }
+    .shape-card.cube::before { background: #f8e6a2; }
+    .shape-number {
+      position: absolute;
+      top: 1.4rem;
+      left: 1.4rem;
+      color: var(--forest);
+      font-size: .75rem;
+      font-weight: 900;
+      letter-spacing: .11em;
+      text-transform: uppercase;
+    }
+    .shape-visual {
+      position: absolute;
+      top: 3.8rem;
+      right: 1.1rem;
+      left: 1.1rem;
+      height: 245px;
+    }
+    .shape-visual svg { position: absolute; inset: 0; width: 100%; height: 100%; margin: auto; filter: drop-shadow(0 18px 12px rgba(20, 59, 45, .15)); }
+    .shape-card h3 { position: relative; margin-bottom: .68rem; color: var(--forest); font-size: 2rem; }
+    .shape-card p { position: relative; margin-bottom: 1rem; color: var(--muted); font-size: .93rem; }
+    .shape-meta { position: relative; display: flex; flex-wrap: wrap; gap: .45rem; margin-bottom: 1rem; }
+    .shape-meta span { padding: .38rem .6rem; border-radius: 999px; background: rgba(255, 255, 255, .75); color: var(--forest); font-size: .72rem; font-weight: 800; }
+    .shape-card button { position: relative; align-self: flex-start; }
+
+    /* Finder */
+    .finder {
+      display: grid;
+      grid-template-columns: minmax(280px, .8fr) minmax(0, 1.2fr);
+      overflow: hidden;
+      border-radius: var(--round);
+      background: var(--forest);
+      box-shadow: var(--shadow);
+    }
+    .finder-intro { padding: clamp(1.8rem, 4vw, 3rem); color: #fff; }
+    .finder-intro .eyebrow { color: var(--yellow); }
+    .finder-intro h2 { margin-bottom: 1rem; font-size: clamp(2rem, 3.8vw, 3.2rem); }
+    .finder-intro p { margin-bottom: 0; color: #cae1d0; }
+    .finder-intro .little-sprout { width: 130px; margin-top: 2.6rem; color: var(--yellow); }
+    .finder-panel { padding: clamp(1.4rem, 3.5vw, 2.7rem); background: #edf7e9; }
+    .finder-fields { display: grid; grid-template-columns: repeat(3, 1fr); gap: .8rem; }
+    .field-label { display: grid; gap: .4rem; color: var(--forest); font-size: .78rem; font-weight: 850; }
+    select {
+      width: 100%;
+      min-height: 47px;
+      padding: .62rem .75rem;
+      color: var(--ink);
+      border: 1px solid #bad0bd;
+      border-radius: 12px;
+      background: #fff;
+    }
+    .finder-result {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      min-height: 130px;
+      margin-top: 1.2rem;
+      padding: 1.05rem 1.15rem;
+      border: 1px dashed #a7c4aa;
+      border-radius: 16px;
+      background: rgba(255,255,255,.65);
+    }
+    .result-orb {
+      display: grid;
+      width: 66px;
+      height: 66px;
+      flex: 0 0 auto;
+      place-items: center;
+      border-radius: 23px 23px 28px 28px;
+      background: var(--coral);
+      color: #fff;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.7rem;
+      font-weight: 800;
+      transform: rotate(-8deg);
+    }
+    .finder-result small { display: block; color: var(--leaf); font-size: .72rem; font-weight: 850; letter-spacing: .09em; text-transform: uppercase; }
+    .finder-result strong { display: block; margin: .15rem 0; color: var(--forest); font-size: 1.12rem; }
+    .finder-result p { margin: 0; color: var(--muted); font-size: .87rem; }
+
+    /* How it works */
+    .process { background: #eef7e9; }
+    .process-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+    .process-card { position: relative; padding: 1.8rem; border: 1px solid #d8e8d7; border-radius: 20px; background: var(--paper); }
+    .process-card::after {
+      position: absolute;
+      top: 3rem;
+      right: -.9rem;
+      z-index: 2;
+      width: 1.7rem;
+      height: 1.7rem;
+      border-top: 2px solid var(--leaf);
+      border-right: 2px solid var(--leaf);
+      background: #eef7e9;
+      content: "";
+      transform: rotate(45deg);
+    }
+    .process-card:last-child::after { display: none; }
+    .step-chip { display: inline-grid; width: 40px; height: 40px; margin-bottom: 1.8rem; place-items: center; border-radius: 50%; color: #fff; background: var(--forest); font-size: .82rem; font-weight: 900; }
+    .process-card:nth-child(2) .step-chip { background: var(--coral); }
+    .process-card:nth-child(3) .step-chip { color: var(--forest); background: var(--yellow); }
+    .process-card h3 { margin-bottom: .7rem; color: var(--forest); font-size: 1.7rem; }
+    .process-card p { margin-bottom: 0; color: var(--muted); font-size: .94rem; }
+    .process-footnote {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .7rem;
+      margin: 2.4rem 0 0;
+      color: var(--muted);
+      font-size: .88rem;
+      font-weight: 750;
+      text-align: center;
+    }
+    .process-footnote svg { width: 28px; color: var(--coral); }
+
+    /* Kits */
+    .kit-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.35rem; }
+    .kit {
+      display: flex;
+      min-height: 485px;
+      flex-direction: column;
+      padding: 1.65rem;
+      border: 1px solid var(--line);
+      border-radius: var(--round);
+      background: var(--paper);
+    }
+    .kit.featured { position: relative; border-color: var(--forest); background: var(--forest); color: #fff; box-shadow: var(--shadow); transform: translateY(-11px); }
+    .kit .tag { display: inline-flex; align-self: flex-start; margin-bottom: 1.2rem; padding: .34rem .65rem; border-radius: 999px; background: var(--mint); color: var(--forest); font-size: .71rem; font-weight: 900; letter-spacing: .07em; text-transform: uppercase; }
+    .kit.featured .tag { background: var(--yellow); }
+    .kit h3 { margin-bottom: .55rem; color: var(--forest); font-size: 2rem; }
+    .kit.featured h3 { color: #fff; }
+    .kit > p { margin-bottom: 1.25rem; color: var(--muted); font-size: .92rem; }
+    .kit.featured > p { color: #c7dfcc; }
+    .kit-price { margin-bottom: 1.3rem; font-family: Georgia, "Times New Roman", serif; color: var(--forest); font-size: 3rem; letter-spacing: -.06em; line-height: 1; }
+    .kit.featured .kit-price { color: var(--yellow); }
+    .kit-price small { color: var(--muted); font-family: Inter, ui-sans-serif, sans-serif; font-size: .78rem; font-weight: 700; letter-spacing: 0; }
+    .kit.featured .kit-price small { color: #c7dfcc; }
+    .kit ul { display: grid; gap: .72rem; margin: 0 0 1.5rem; padding: 0; list-style: none; }
+    .kit li { display: flex; gap: .6rem; color: var(--muted); font-size: .88rem; font-weight: 650; }
+    .kit li::before { color: var(--leaf); content: "●"; font-size: .58rem; line-height: 1.9; }
+    .kit.featured li { color: #d2e5d5; }
+    .kit.featured li::before { color: var(--yellow); }
+    .kit .button { margin-top: auto; }
+    .kit.featured .button-primary { color: var(--forest); background: var(--yellow); }
+    .kit.featured .button-primary:hover { background: #ffe07d; }
+
+    /* Gallery */
+    .harvest-area { background: #ffd9cd; }
+    .harvest-grid {
+      display: grid;
+      grid-template-columns: 1.2fr .9fr .9fr;
+      grid-template-rows: 225px 225px;
+      gap: 1rem;
+    }
+    .harvest-tile {
+      position: relative;
+      overflow: hidden;
+      border-radius: 20px;
+      background: var(--paper);
+    }
+    .harvest-tile::after {
+      position: absolute;
+      bottom: 1rem;
+      left: 1rem;
+      padding: .4rem .65rem;
+      border-radius: 999px;
+      background: rgba(255,253,248,.86);
+      color: var(--forest);
+      content: attr(data-label);
+      font-size: .72rem;
+      font-weight: 850;
+      backdrop-filter: blur(7px);
+    }
+    .harvest-tile.large { grid-row: span 2; background: #cfe8d1; }
+    .harvest-tile.one { background: #f6dc78; }
+    .harvest-tile.two { background: #f7bda9; }
+    .harvest-tile.three { background: #e1c4dc; }
+    .harvest-tile .tile-fruit { position: absolute; inset: 0; margin: auto; filter: drop-shadow(0 18px 13px rgba(42, 55, 38, .18)); }
+    .harvest-tile.large .tile-fruit { width: 78%; height: 78%; }
+    .harvest-tile:not(.large) .tile-fruit { width: 68%; height: 68%; }
+    .gallery-note { margin: 1.4rem 0 0; color: #71453c; font-size: .94rem; font-weight: 700; }
+
+    /* Testimonials and newsletter */
+    .quote-grid { display: grid; grid-template-columns: 1.25fr .75fr; gap: 1.35rem; }
+    .big-quote { position: relative; padding: clamp(1.8rem, 4.5vw, 4rem); overflow: hidden; border-radius: var(--round); background: var(--plum); color: #fff; }
+    .big-quote::before { position: absolute; top: -1rem; right: 1.4rem; color: rgba(255,255,255,.12); content: "“"; font-family: Georgia, serif; font-size: 16rem; line-height: 1; }
+    .big-quote blockquote { position: relative; max-width: 18ch; margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(1.8rem, 3.4vw, 3.1rem); letter-spacing: -.045em; line-height: 1.05; }
+    .quote-person { display: flex; align-items: center; gap: .75rem; margin-top: 2rem; color: #e8d9e9; font-size: .83rem; font-weight: 750; }
+    .initials { display: grid; width: 38px; height: 38px; place-items: center; border-radius: 50%; background: var(--yellow); color: var(--plum); font-size: .76rem; font-weight: 900; }
+    .quote-stats { display: grid; gap: 1.35rem; }
+    .stat-card { display: flex; flex-direction: column; justify-content: center; min-height: 170px; padding: 1.55rem; border-radius: 20px; background: var(--mint); }
+    .stat-card:nth-child(2) { background: var(--yellow); }
+    .stat-card strong { color: var(--forest); font-family: Georgia, serif; font-size: 3.8rem; letter-spacing: -.07em; line-height: 1; }
+    .stat-card span { margin-top: .5rem; color: #45604e; font-size: .88rem; font-weight: 750; }
+
+    .newsletter { padding: clamp(3.1rem, 7vw, 5.8rem) 0; background: var(--forest); }
+    .newsletter-inner { display: grid; grid-template-columns: .9fr 1.1fr; gap: 2rem; align-items: center; }
+    .newsletter h2 { color: #fff; font-size: clamp(2.1rem, 4vw, 3.7rem); }
+    .newsletter p { margin: 1rem 0 0; color: #c9e0cf; }
+    .email-form { display: grid; grid-template-columns: 1fr auto; gap: .65rem; }
+    .email-form input {
+      min-width: 0;
+      min-height: 52px;
+      padding: .8rem 1rem;
+      color: var(--forest);
+      border: 2px solid transparent;
+      border-radius: 999px;
+      background: #fff;
+    }
+    .email-form input:focus { border-color: var(--yellow); outline: none; }
+    .form-message { min-height: 1.5rem; margin: .7rem 0 0; color: #d2e7d6; font-size: .84rem; font-weight: 650; }
+
+    /* Footer */
+    .footer { padding: 3.3rem 0 1.65rem; color: #c9d9cd; background: var(--forest-deep); }
+    .footer-grid { display: grid; grid-template-columns: 1.45fr repeat(3, .6fr); gap: 2rem; padding-bottom: 2.6rem; }
+    .footer .brand { color: #fff; }
+    .footer-copy { max-width: 21rem; margin: 1rem 0 0; color: #aac3b1; font-size: .88rem; }
+    .footer h3 { margin: 0 0 .9rem; color: var(--yellow); font-family: Inter, ui-sans-serif, sans-serif; font-size: .77rem; letter-spacing: .11em; text-transform: uppercase; }
+    .footer ul { display: grid; gap: .5rem; margin: 0; padding: 0; list-style: none; font-size: .87rem; }
+    .footer a:hover { color: #fff; }
+    .footer-bottom { display: flex; justify-content: space-between; gap: 1rem; padding-top: 1.25rem; border-top: 1px solid rgba(201,217,205,.17); color: #92ac99; font-size: .75rem; }
+
+    /* Dialog */
+    dialog {
+      width: min(620px, calc(100% - 30px));
+      padding: 0;
+      overflow: hidden;
+      border: 0;
+      border-radius: 22px;
+      box-shadow: 0 28px 70px rgba(0,0,0,.35);
+      color: var(--ink);
+      background: var(--paper);
+    }
+    dialog::backdrop { background: rgba(8, 36, 25, .58); backdrop-filter: blur(4px); }
+    .dialog-inner { display: grid; grid-template-columns: 160px 1fr; }
+    .dialog-icon { display: grid; min-height: 260px; place-items: center; background: #d8edd1; }
+    .dialog-icon svg { width: 120px; filter: drop-shadow(0 15px 10px rgba(20,59,45,.17)); }
+    .dialog-copy { padding: 2.1rem 2.5rem 2.15rem 1.8rem; }
+    .dialog-close {
+      position: absolute;
+      top: .8rem;
+      right: .8rem;
+      display: grid;
+      width: 35px;
+      height: 35px;
+      padding: 0;
+      place-items: center;
+      border: 0;
+      border-radius: 50%;
+      background: rgba(255,255,255,.82);
+      color: var(--forest);
+      font-size: 1.2rem;
+    }
+    .dialog-copy .eyebrow { margin-bottom: .6rem; }
+    .dialog-copy h2 { margin-bottom: .8rem; font-size: 2.35rem; }
+    .dialog-copy p { color: var(--muted); }
+    .dialog-list { display: grid; gap: .45rem; margin: 1.25rem 0 0; padding: 0; list-style: none; color: var(--forest); font-size: .88rem; font-weight: 750; }
+    .dialog-list li::before { color: var(--coral); content: "✦"; margin-right: .5rem; }
+
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.is-visible { opacity: 1; transform: translateY(0); }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+    @media (max-width: 880px) {
+      .hero-grid, .intro-grid, .newsletter-inner { grid-template-columns: 1fr; }
+      .hero-copy { max-width: 650px; }
+      .hero-art { width: min(100%, 570px); min-height: 410px; margin-inline: auto; }
+      .shape-grid, .kit-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .85rem; }
+      .shape-card { min-height: 440px; padding: 1.2rem; }
+      .shape-card h3 { font-size: 1.68rem; }
+      .shape-visual { height: 220px; }
+      .finder { grid-template-columns: .75fr 1.25fr; }
+      .footer-grid { grid-template-columns: 1.2fr repeat(3, .7fr); gap: 1.25rem; }
+    }
+    @media (max-width: 720px) {
+      .shell { width: min(100% - 30px, var(--max)); }
+      .nav { min-height: 65px; }
+      .nav-links {
+        position: fixed;
+        top: 65px;
+        right: 0;
+        left: 0;
+        display: grid;
+        gap: .2rem;
+        padding: 1rem 1.2rem 1.35rem;
+        border-bottom: 1px solid var(--line);
+        background: var(--cream);
+        box-shadow: 0 16px 25px rgba(20,59,45,.09);
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-10px);
+        transition: opacity .2s ease, transform .2s ease;
+      }
+      .nav-links.is-open { opacity: 1; pointer-events: auto; transform: none; }
+      .nav-links a { padding: .8rem .9rem; }
+      .nav-cta .button { display: none; }
+      .menu-toggle { display: block; }
+      .plan-pill { padding: .42rem .55rem; }
+      .plan-pill > span:first-child { display: none; }
+      .section-heading { display: block; margin-bottom: 2rem; }
+      .section-heading p { margin-top: 1rem; }
+      .proof-list { grid-template-columns: repeat(2, 1fr); min-height: 128px; padding: 1rem 0; }
+      .proof-list div { justify-content: flex-start; text-align: left; }
+      .reason-grid { gap: .75rem; }
+      .reason-card { min-height: 160px; padding: 1.1rem; }
+      .shape-grid, .kit-grid { grid-template-columns: 1fr; }
+      .shape-card { min-height: 420px; }
+      .shape-visual { right: 3rem; left: 3rem; height: 220px; }
+      .finder { grid-template-columns: 1fr; }
+      .finder-fields { grid-template-columns: 1fr; }
+      .process-grid { grid-template-columns: 1fr; gap: .8rem; }
+      .process-card::after { top: auto; right: auto; bottom: -.9rem; left: 50%; transform: translateX(-50%) rotate(135deg); }
+      .kit.featured { transform: none; }
+      .harvest-grid { grid-template-columns: 1fr 1fr; grid-template-rows: 195px 195px 195px; }
+      .harvest-tile.large { grid-row: span 2; }
+      .harvest-tile.three { grid-column: span 2; }
+      .quote-grid { grid-template-columns: 1fr; }
+      .quote-stats { grid-template-columns: 1fr 1fr; }
+      .stat-card { min-height: 145px; }
+      .footer-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid > div:first-child { grid-column: span 2; }
+    }
+    @media (max-width: 480px) {
+      .hero { padding-top: 3.4rem; }
+      .hero h1 { font-size: clamp(3rem, 15vw, 4.3rem); }
+      .hero-art { min-height: 325px; }
+      .fruit-heart { top: 4%; right: 10%; width: 205px; }
+      .fruit-star { width: 125px; }
+      .fruit-cube { width: 135px; }
+      .art-label { padding: .52rem .65rem; font-size: .65rem; }
+      .art-label.two { bottom: 46%; }
+      .intro-grid { gap: 1rem; }
+      .reason-card strong { font-size: 1.08rem; }
+      .reason-card span { font-size: .75rem; }
+      .harvest-grid { grid-template-rows: 160px 160px 160px; gap: .7rem; }
+      .quote-stats { grid-template-columns: 1fr; gap: .8rem; }
+      .email-form { grid-template-columns: 1fr; }
+      .footer-bottom { display: grid; }
+      .dialog-inner { grid-template-columns: 1fr; }
+      .dialog-icon { min-height: 145px; }
+      .dialog-icon svg { width: 90px; }
+      .dialog-copy { padding: 1.7rem; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="shell nav">
+      <a class="brand" href="#top" aria-label="Shaped Fruit Gardening home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 21s-7-4.6-7-10.3C5 7.9 7 6 9.3 6c1.4 0 2.3.7 2.7 1.4C12.4 6.7 13.3 6 14.7 6 17 6 19 7.9 19 10.7 19 16.4 12 21 12 21Z"/>
+            <path d="M12 6c0-2 1.2-3 3.2-3.2"/>
+          </svg>
+        </span>
+        <span class="brand-name">Shaped Fruit<small>Gardening</small></span>
+      </a>
+      <nav class="nav-links" id="site-nav" aria-label="Main navigation">
+        <a href="#shapes">Shapes</a>
+        <a href="#how-it-works">How it works</a>
+        <a href="#kits">Garden kits</a>
+        <a href="#harvest">Harvests</a>
+      </nav>
+      <div class="nav-cta">
+        <a class="plan-pill" href="#kits" aria-label="View your garden plan">
+          <span>Garden plan</span><span class="plan-count" id="planCount">0</span>
+        </a>
+        <a class="button button-primary button-small" href="#finder">Find your shape</a>
+        <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open navigation" aria-controls="site-nav" aria-expanded="false"><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="shell hero-grid">
+        <div class="hero-copy reveal">
+          <p class="eyebrow">A garden with a twist</p>
+          <h1>Fruit that takes <em>shape.</em></h1>
+          <p class="hero-text">Turn a sunny patch into a story worth sharing. We pair gentle growing moulds with step-by-step garden know-how, so your next harvest is anything but ordinary.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#finder">Find my first fruit <span aria-hidden="true">→</span></a>
+            <a class="button button-outline" href="#how-it-works">See how it grows</a>
+          </div>
+          <div class="hero-note">
+            <span class="avatar-stack" aria-hidden="true"><span>RA</span><span>ML</span><span>IK</span></span>
+            <span>Made for first-time growers and seasoned plot-tenders.</span>
+          </div>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="art-label one"><b>♥</b> A delicious surprise</div>
+          <div class="art-label two"><b>✦</b> Garden-grown joy</div>
+          <svg class="fruit-illustration fruit-heart" viewBox="0 0 320 310">
+            <defs>
+              <linearGradient id="heartBerry" x1="46" y1="28" x2="273" y2="276" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#ff9380"/><stop offset=".55" stop-color="#ef5d51"/><stop offset="1" stop-color="#c7413e"/>
+              </linearGradient>
+              <linearGradient id="heartLeaf" x1="143" y1="8" x2="189" y2="87" gradientUnits="userSpaceOnUse"><stop stop-color="#7db75a"/><stop offset="1" stop-color="#2f7650"/></linearGradient>
+            </defs>
+            <path d="M163 286C108 240 37 196 28 125 20 61 68 30 111 50c22 10 38 31 46 48 9-17 25-38 47-48 43-20 91 11 83 75-9 71-78 116-124 161Z" fill="url(#heartBerry)"/>
+            <path d="M157 93C150 64 132 39 104 26c25-5 48 3 61 22 9-25 33-37 59-33-22 17-33 39-34 68-11-6-23-5-33 10Z" fill="url(#heartLeaf)"/>
+            <path d="M133 108c-17-14-35-22-54-22M177 108c16-15 34-23 54-23" fill="none" stroke="#ffb5a5" stroke-width="8" stroke-linecap="round" opacity=".55"/>
+            <g fill="#ffd8c6" opacity=".85"><circle cx="92" cy="135" r="4"/><circle cx="126" cy="148" r="4"/><circle cx="190" cy="142" r="4"/><circle cx="224" cy="129" r="4"/><circle cx="111" cy="183" r="4"/><circle cx="163" cy="203" r="4"/><circle cx="203" cy="181" r="4"/></g>
+          </svg>
+          <svg class="fruit-illustration fruit-star" viewBox="0 0 215 215">
+            <defs><linearGradient id="starCuke" x1="36" y1="23" x2="184" y2="188" gradientUnits="userSpaceOnUse"><stop stop-color="#a7cd63"/><stop offset="1" stop-color="#4f964c"/></linearGradient></defs>
+            <path d="m107 17 21 56 59 1-46 37 16 58-50-35-50 35 16-58L27 74l59-1 21-56Z" fill="url(#starCuke)"/>
+            <path d="m107 17 7 19M128 73l20 1M141 111l15 18M107 134v20M73 111l-15 18M86 73l-20 1" fill="none" stroke="#d7ea98" stroke-width="7" stroke-linecap="round" opacity=".7"/>
+            <path d="M99 23c3-16 13-24 25-25" fill="none" stroke="#39784b" stroke-width="8" stroke-linecap="round"/>
+          </svg>
+          <svg class="fruit-illustration fruit-cube" viewBox="0 0 230 195">
+            <defs><linearGradient id="cubeMelon" x1="42" y1="28" x2="185" y2="172" gradientUnits="userSpaceOnUse"><stop stop-color="#9fcd6b"/><stop offset="1" stop-color="#477d3c"/></linearGradient></defs>
+            <path d="M51 55 114 19l65 37v75l-64 37-64-37V55Z" fill="url(#cubeMelon)"/>
+            <path d="m51 55 64 37 64-36M115 92v76" fill="none" stroke="#d6e69e" stroke-width="7" stroke-linejoin="round" opacity=".66"/>
+            <path d="M111 19c-1-15 5-25 18-30" fill="none" stroke="#377d52" stroke-width="9" stroke-linecap="round"/>
+            <g fill="#f6e9b3" opacity=".8"><circle cx="82" cy="78" r="3.5"/><circle cx="101" cy="58" r="3.5"/><circle cx="143" cy="79" r="3.5"/><circle cx="153" cy="112" r="3.5"/><circle cx="108" cy="126" r="3.5"/></g>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <section class="proof-strip" aria-label="Garden benefits">
+      <div class="shell proof-list">
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21V8M12 15c-4 0-7-2-8-6 4 0 7 2 8 6ZM12 11c1-4 4-6 8-6-1 4-4 6-8 6Z"/></svg>Gentle on young fruit</div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21c4-4 7-7 7-11a7 7 0 0 0-14 0c0 4 3 7 7 11Z"/><path d="M12 7v6M9 10h6"/></svg>For balconies to backyards</div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M12 3v18"/><circle cx="12" cy="12" r="8"/></svg>Simple seasonal guidance</div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-4.6-7-10.3C5 7.9 7 6 9.3 6c1.4 0 2.3.7 2.7 1.4C12.4 6.7 13.3 6 14.7 6 17 6 19 7.9 19 10.7 19 16.4 12 21 12 21Z"/></svg>Extraordinary harvests</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="shell intro-grid">
+        <article class="intro-copy reveal">
+          <p class="eyebrow">Grow more than food</p>
+          <h2>A harvest people lean in to see.</h2>
+          <p>Shaped Fruit Gardening gives plants room to grow while a reusable food-safe mould gently guides the fruit. It is low-fuss garden theatre: a tiny experiment, a little patience, and a big reveal at harvest.</p>
+          <ul class="micro-points">
+            <li>Clear timing cues for every stage</li>
+            <li>Reusable moulds made for the growing season</li>
+            <li>Friendly advice for sun, water, and pollination</li>
+          </ul>
+        </article>
+        <div class="reason-grid reveal" aria-label="Reasons to grow shaped fruit">
+          <div class="reason-card">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 43S8 33 8 20c0-6 4-10 10-10 3 0 5 1 6 4 1-3 3-4 6-4 6 0 10 4 10 10 0 13-16 23-16 23Z"/><path d="M24 10c0-4 2-6 6-7"/></svg>
+            <strong>Make a memory</strong><span>Turn an ordinary picnic into a talking point.</span>
+          </div>
+          <div class="reason-card">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M24 42V18M24 29c-8 0-14-5-16-12 9 0 14 5 16 12ZM24 24c3-8 9-12 16-12-2 8-8 12-16 12Z"/></svg>
+            <strong>Learn by doing</strong><span>Make growing feel wonderfully hands-on.</span>
+          </div>
+          <div class="reason-card">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 29 10-10 7 7 13-13"/><path d="M31 13h8v8"/><path d="M8 39h32"/></svg>
+            <strong>Stand out at market</strong><span>Give small harvests their own signature.</span>
+          </div>
+          <div class="reason-card">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="24" cy="24" r="16"/><path d="M24 15v9l6 4"/></svg>
+            <strong>Slow joy</strong><span>A lovely reason to check in on the garden.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="shapes">
+      <div class="shell">
+        <div class="section-heading reveal">
+          <div><p class="eyebrow">Pick a personality</p><h2>Start with a shape that makes you smile.</h2></div>
+          <p>Each guide is tuned to the fruit’s rhythm, with gentle setup notes and a harvest window so you can enjoy the experiment along the way.</p>
+        </div>
+        <div class="shape-grid">
+          <article class="shape-card heart reveal">
+            <span class="shape-number">01 / Sweet</span>
+            <div class="shape-visual" aria-hidden="true">
+              <svg viewBox="0 0 300 255">
+                <path d="M151 231C108 194 47 160 39 105 32 55 70 29 105 45c20 9 36 28 44 44 8-16 24-35 44-44 35-16 73 10 66 60-8 55-69 89-108 126Z" fill="#ef6a50"/>
+                <path d="M149 83c-7-21-23-37-46-44 22-8 40 0 50 17 9-16 27-23 47-17-18 11-31 26-37 46-5-3-9-3-14-2Z" fill="#3f8855"/>
+                <g fill="#ffd3c4"><circle cx="97" cy="112" r="3.5"/><circle cx="129" cy="126" r="3.5"/><circle cx="178" cy="122" r="3.5"/><circle cx="207" cy="106" r="3.5"/><circle cx="117" cy="158" r="3.5"/><circle cx="164" cy="171" r="3.5"/></g>
+              </svg>
+            </div>
+            <h3>Heart strawberries</h3>
+            <p>Small, sweet and irresistible for gifts, lunchboxes, and first garden wins.</p>
+            <div class="shape-meta"><span>Early summer</span><span>Easy start</span></div>
+            <button class="button button-outline button-small shape-detail" data-shape="heart" type="button">Growing details <span aria-hidden="true">↗</span></button>
+          </article>
+          <article class="shape-card star reveal">
+            <span class="shape-number">02 / Crisp</span>
+            <div class="shape-visual" aria-hidden="true">
+              <svg viewBox="0 0 300 255">
+                <path d="m150 24 26 66 70 2-54 44 19 70-61-42-61 42 19-70-54-44 70-2 26-66Z" fill="#6da956"/>
+                <path d="m150 24 10 26M176 90l27 2M192 136l20 25M150 164v27M108 136l-20 25M124 90l-27 2" fill="none" stroke="#c9e58d" stroke-width="9" stroke-linecap="round"/>
+                <path d="M147 28c0-17 10-27 24-28" fill="none" stroke="#3d8050" stroke-width="9" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3>Star cucumbers</h3>
+            <p>A crunchy garden surprise for platters, pickles, and curious young growers.</p>
+            <div class="shape-meta"><span>High summer</span><span>Fast grower</span></div>
+            <button class="button button-outline button-small shape-detail" data-shape="star" type="button">Growing details <span aria-hidden="true">↗</span></button>
+          </article>
+          <article class="shape-card cube reveal">
+            <span class="shape-number">03 / Bold</span>
+            <div class="shape-visual" aria-hidden="true">
+              <svg viewBox="0 0 300 255">
+                <path d="m86 73 64-37 65 37v76l-65 37-64-37V73Z" fill="#74a94f"/>
+                <path d="m86 73 64 37 65-37M150 110v76" fill="none" stroke="#d5e99f" stroke-width="8" stroke-linejoin="round"/>
+                <path d="M147 35c0-15 8-25 22-29" fill="none" stroke="#3a814f" stroke-width="9" stroke-linecap="round"/>
+                <g fill="#f7e9ad"><circle cx="119" cy="89" r="3.5"/><circle cx="144" cy="70" r="3.5"/><circle cx="177" cy="93" r="3.5"/><circle cx="177" cy="125" r="3.5"/><circle cx="141" cy="140" r="3.5"/></g>
+              </svg>
+            </div>
+            <h3>Square watermelons</h3>
+            <p>A patient, show-stopping project for growers ready for a statement harvest.</p>
+            <div class="shape-meta"><span>Late summer</span><span>Big reward</span></div>
+            <button class="button button-outline button-small shape-detail" data-shape="cube" type="button">Growing details <span aria-hidden="true">↗</span></button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="finder">
+      <div class="shell">
+        <div class="finder reveal">
+          <div class="finder-intro">
+            <p class="eyebrow">A tiny garden matchmaker</p>
+            <h2>Not sure which shape to try first?</h2>
+            <p>Tell us your growing mood and we’ll point you toward a joyful first project.</p>
+            <svg class="little-sprout" viewBox="0 0 160 90" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">
+              <path d="M80 85V40M80 60C55 61 39 48 32 25c25 1 41 13 48 35ZM80 49c13-22 31-31 54-28-8 23-25 31-54 28Z"/>
+            </svg>
+          </div>
+          <div class="finder-panel">
+            <div class="finder-fields">
+              <label class="field-label">I want to grow for
+                <select id="growGoal">
+                  <option value="gift">A gift or celebration</option>
+                  <option value="kids">Curious kids</option>
+                  <option value="market">A market table</option>
+                </select>
+              </label>
+              <label class="field-label">My growing space is
+                <select id="growSpace">
+                  <option value="small">A pot or small patch</option>
+                  <option value="medium">A sunny raised bed</option>
+                  <option value="large">A roomy plot</option>
+                </select>
+              </label>
+              <label class="field-label">I’m feeling
+                <select id="growMood">
+                  <option value="new">New to growing</option>
+                  <option value="ready">Ready for a challenge</option>
+                  <option value="patient">Patient and curious</option>
+                </select>
+              </label>
+            </div>
+            <button class="button button-primary button-small" id="findMatch" type="button" style="margin-top:1rem">Show my match <span aria-hidden="true">→</span></button>
+            <div class="finder-result" id="finderResult" aria-live="polite">
+              <span class="result-orb" id="resultIcon" aria-hidden="true">♥</span>
+              <div><small>Your starting point</small><strong id="resultTitle">Heart strawberry kit</strong><p id="resultText">A sweet, low-pressure project for sunny pots and thoughtful little gifts.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section process" id="how-it-works">
+      <div class="shell">
+        <div class="section-heading reveal">
+          <div><p class="eyebrow">The gentle part matters</p><h2>Guide the fruit. Let the plant lead.</h2></div>
+          <p>We make the process simple enough for a weekend gardener, while leaving plenty of room for the slow magic of growing.</p>
+        </div>
+        <div class="process-grid">
+          <article class="process-card reveal"><span class="step-chip">01</span><h3>Choose your moment</h3><p>Wait until a young, healthy fruit has set. Your kit’s guide shows exactly what to look for before you begin.</p></article>
+          <article class="process-card reveal"><span class="step-chip">02</span><h3>Clip on the mould</h3><p>Position the food-safe guide gently around the fruit. Air, light, and water still do their important work.</p></article>
+          <article class="process-card reveal"><span class="step-chip">03</span><h3>Watch the reveal</h3><p>Check in as it fills out, then lift away the mould at harvest for a fruit-shaped little celebration.</p></article>
+        </div>
+        <p class="process-footnote"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 21V8M12 15c-4 0-7-2-8-6 4 0 7 2 8 6ZM12 11c1-4 4-6 8-6-1 4-4 6-8 6Z"/></svg> No pressure, no force — just a supportive shape guide at the right time.</p>
+      </div>
+    </section>
+
+    <section class="section" id="kits">
+      <div class="shell">
+        <div class="section-heading reveal">
+          <div><p class="eyebrow">Ready when the season is</p><h2>Garden kits made for a good first reveal.</h2></div>
+          <p>Choose the way you want to grow. Every kit comes with a beginner-friendly seasonal guide and a growing checklist.</p>
+        </div>
+        <div class="kit-grid">
+          <article class="kit reveal">
+            <span class="tag">First harvest</span><h3>Little Wonder</h3><p>For one joyful experiment on a sunny windowsill, balcony, or tiny patch.</p>
+            <div class="kit-price">₹799 <small>/ starter kit</small></div>
+            <ul><li>One heart strawberry mould</li><li>Planting & care mini-guide</li><li>Fruit-stage timing card</li><li>Seasonal reminder email</li></ul>
+            <button class="button button-outline add-plan" data-kit="Little Wonder" type="button">Add to garden plan <span aria-hidden="true">+</span></button>
+          </article>
+          <article class="kit featured reveal">
+            <span class="tag">Most loved</span><h3>Family Plot</h3><p>Three different shapes for a summer full of garden questions, wins, and photo moments.</p>
+            <div class="kit-price">₹1,899 <small>/ three-shape kit</small></div>
+            <ul><li>Heart, star & cube moulds</li><li>Family garden activity cards</li><li>Full seasonal care guide</li><li>Priority growing support</li></ul>
+            <button class="button button-primary add-plan" data-kit="Family Plot" type="button">Add to garden plan <span aria-hidden="true">+</span></button>
+          </article>
+          <article class="kit reveal">
+            <span class="tag">For bold growers</span><h3>Market Maker</h3><p>A plentiful set for growers creating memorable displays, gift boxes, and market moments.</p>
+            <div class="kit-price">₹3,499 <small>/ grower set</small></div>
+            <ul><li>Six durable growing moulds</li><li>Crop planning worksheet</li><li>Harvest & display notes</li><li>Two seasonal support check-ins</li></ul>
+            <button class="button button-outline add-plan" data-kit="Market Maker" type="button">Add to garden plan <span aria-hidden="true">+</span></button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section harvest-area" id="harvest">
+      <div class="shell">
+        <div class="section-heading reveal">
+          <div><p class="eyebrow" style="color:#9b4c3f">A little harvest theatre</p><h2>Made to be passed around the table.</h2></div>
+          <p style="color:#71453c">Your garden is allowed to be practical and playful. Here’s the sort of small delight we grow toward.</p>
+        </div>
+        <div class="harvest-grid reveal" aria-label="Examples of shaped fruit harvests">
+          <div class="harvest-tile large" data-label="Heart berry afternoon">
+            <svg class="tile-fruit" viewBox="0 0 280 280" aria-hidden="true"><path d="M140 248C94 210 35 173 28 111 22 57 63 31 103 48c20 8 31 25 37 40 7-15 18-32 37-40 40-17 81 9 75 63-7 62-66 99-112 137Z" fill="#ed6454"/><path d="M139 87c-8-23-24-39-48-47 23-7 41 2 49 20 11-19 29-26 51-19-21 12-34 28-39 47-5-3-15-3-13-1Z" fill="#3c8150"/><g fill="#ffd5c2"><circle cx="93" cy="118" r="4"/><circle cx="123" cy="136" r="4"/><circle cx="174" cy="127" r="4"/><circle cx="202" cy="110" r="4"/><circle cx="116" cy="168" r="4"/><circle cx="159" cy="185" r="4"/></g></svg>
+          </div>
+          <div class="harvest-tile one" data-label="Starry salad">
+            <svg class="tile-fruit" viewBox="0 0 180 180" aria-hidden="true"><path d="m90 15 20 52 55 2-43 34 15 54-47-32-47 32 15-54-43-34 55-2 20-52Z" fill="#71a755"/><path d="m90 15 8 21M110 67l22 2M122 103l16 20M90 125v23M58 103l-16 20M70 67l-22 2" fill="none" stroke="#d6e99c" stroke-width="7" stroke-linecap="round"/></svg>
+          </div>
+          <div class="harvest-tile two" data-label="A sweet surprise">
+            <svg class="tile-fruit" viewBox="0 0 180 180" aria-hidden="true"><path d="M90 158C57 130 20 104 16 66 12 33 37 17 62 28c13 5 22 17 28 28 5-11 15-23 28-28 25-11 50 5 46 38-5 38-42 64-74 92Z" fill="#f05e55"/><path d="M89 54C83 39 72 28 57 23c15-5 26 2 33 13 7-11 19-17 34-12-14 8-23 18-27 32-3-2-6-2-8-2Z" fill="#3e8552"/></svg>
+          </div>
+          <div class="harvest-tile three" data-label="Stackable summer">
+            <svg class="tile-fruit" viewBox="0 0 190 180" aria-hidden="true"><path d="m43 53 52-30 52 30v61l-52 30-52-30V53Z" fill="#73a94e"/><path d="m43 53 52 30 52-30M95 83v61" fill="none" stroke="#d8e99c" stroke-width="7" stroke-linejoin="round"/><circle cx="71" cy="67" r="3" fill="#f6e9ac"/><circle cx="104" cy="56" r="3" fill="#f6e9ac"/><circle cx="123" cy="86" r="3" fill="#f6e9ac"/></svg>
+          </div>
+        </div>
+        <p class="gallery-note">Start small, care deeply, and let your garden make the conversation.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="shell quote-grid">
+        <article class="big-quote reveal">
+          <blockquote>“My daughter checked the strawberry pot every morning. Harvest day felt like a tiny birthday party.”</blockquote>
+          <div class="quote-person"><span class="initials">AM</span><span>Anika M. · balcony grower, Pune</span></div>
+        </article>
+        <div class="quote-stats reveal">
+          <div class="stat-card"><strong>3 steps</strong><span>from a young fruit to a delightful reveal</span></div>
+          <div class="stat-card"><strong>1 big grin</strong><span>the real measure of a successful harvest</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="newsletter" id="contact">
+      <div class="shell newsletter-inner">
+        <div class="reveal">
+          <p class="eyebrow" style="color:#f5c84c">Grow along with us</p>
+          <h2>Get the next planting nudge.</h2>
+          <p>Seasonal tips, shape ideas, and gentle reminders for when it is time to try something new in the garden.</p>
+        </div>
+        <div class="reveal">
+          <form class="email-form" id="emailForm" novalidate>
+            <label class="sr-only" for="email">Email address</label>
+            <input id="email" name="email" type="email" autocomplete="email" placeholder="Your email address" required>
+            <button class="button button-light" type="submit">Send me the good stuff</button>
+          </form>
+          <p class="form-message" id="formMessage" aria-live="polite">No spam. Just timely garden notes.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="shell">
+      <div class="footer-grid">
+        <div>
+          <a class="brand" href="#top">
+            <span class="brand-mark" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.6-7-10.3C5 7.9 7 6 9.3 6c1.4 0 2.3.7 2.7 1.4C12.4 6.7 13.3 6 14.7 6 17 6 19 7.9 19 10.7 19 16.4 12 21 12 21Z"/><path d="M12 6c0-2 1.2-3 3.2-3.2"/></svg>
+            </span>
+            <span class="brand-name">Shaped Fruit<small>Gardening</small></span>
+          </a>
+          <p class="footer-copy">A happier way to grow fruit with a little more personality, one sunny season at a time.</p>
+        </div>
+        <div><h3>Explore</h3><ul><li><a href="#shapes">Shape collection</a></li><li><a href="#how-it-works">How it works</a></li><li><a href="#kits">Garden kits</a></li></ul></div>
+        <div><h3>Growing</h3><ul><li><a href="#finder">Find your shape</a></li><li><a href="#harvest">Harvest ideas</a></li><li><a href="#contact">Seasonal notes</a></li></ul></div>
+        <div><h3>Say hello</h3><ul><li><a href="mailto:hello@shapedfruit.garden">hello@shapedfruit.garden</a></li><li><a href="#contact">Garden newsletter</a></li><li><a href="#top">Back to top ↑</a></li></ul></div>
+      </div>
+      <div class="footer-bottom"><span>© <span id="year"></span> Shaped Fruit Gardening</span><span>Made for delightful growing.</span></div>
+    </div>
+  </footer>
+
+  <dialog id="shapeDialog" aria-labelledby="dialogTitle">
+    <div class="dialog-inner">
+      <div class="dialog-icon" id="dialogIcon" aria-hidden="true"></div>
+      <div class="dialog-copy">
+        <button class="dialog-close" id="dialogClose" type="button" aria-label="Close details">×</button>
+        <p class="eyebrow" id="dialogEyebrow">Sweet & simple</p>
+        <h2 id="dialogTitle">Heart strawberries</h2>
+        <p id="dialogText"></p>
+        <ul class="dialog-list" id="dialogList"></ul>
+      </div>
+    </div>
+  </dialog>
+
+  <script>
+    (function () {
+      const menuToggle = document.getElementById('menuToggle');
+      const nav = document.getElementById('site-nav');
+      const body = document.body;
+
+      function closeMenu() {
+        nav.classList.remove('is-open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.setAttribute('aria-label', 'Open navigation');
+        body.classList.remove('menu-open');
+      }
+      menuToggle.addEventListener('click', function () {
+        const isOpen = nav.classList.toggle('is-open');
+        menuToggle.setAttribute('aria-expanded', String(isOpen));
+        menuToggle.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
+        body.classList.toggle('menu-open', isOpen);
+      });
+      nav.querySelectorAll('a').forEach(function (link) { link.addEventListener('click', closeMenu); });
+      window.addEventListener('keydown', function (event) { if (event.key === 'Escape') closeMenu(); });
+
+      const matchButton = document.getElementById('findMatch');
+      const goal = document.getElementById('growGoal');
+      const space = document.getElementById('growSpace');
+      const mood = document.getElementById('growMood');
+      const resultIcon = document.getElementById('resultIcon');
+      const resultTitle = document.getElementById('resultTitle');
+      const resultText = document.getElementById('resultText');
+
+      function showMatch() {
+        let match = {
+          icon: '♥',
+          title: 'Heart strawberry kit',
+          text: 'A sweet, low-pressure project for sunny pots and thoughtful little gifts.'
+        };
+        if (goal.value === 'kids' || mood.value === 'new' || space.value === 'small') {
+          match = { icon: '♥', title: 'Heart strawberry kit', text: 'Compact, cheerful, and ideal for showing curious new growers the magic of harvest.' };
+        } else if (goal.value === 'market' || space.value === 'large' || mood.value === 'patient') {
+          match = { icon: '□', title: 'Square watermelon kit', text: 'A bold, patient project for a roomy plot and a harvest designed to stop people in their tracks.' };
+        } else if (goal.value === 'gift' || mood.value === 'ready') {
+          match = { icon: '✦', title: 'Star cucumber kit', text: 'A fast, fresh favourite for colourful plates and surprisingly simple garden theatre.' };
+        }
+        resultIcon.textContent = match.icon;
+        resultTitle.textContent = match.title;
+        resultText.textContent = match.text;
+        resultIcon.animate([{ transform: 'rotate(-8deg) scale(.78)' }, { transform: 'rotate(0) scale(1.1)' }, { transform: 'rotate(-8deg) scale(1)' }], { duration: 420, easing: 'ease-out' });
+      }
+      matchButton.addEventListener('click', showMatch);
+
+      const plans = new Set();
+      const planCount = document.getElementById('planCount');
+      document.querySelectorAll('.add-plan').forEach(function (button) {
+        button.addEventListener('click', function () {
+          const kitName = button.dataset.kit;
+          if (!plans.has(kitName)) {
+            plans.add(kitName);
+            button.innerHTML = 'Added to garden plan <span aria-hidden="true">✓</span>';
+            button.setAttribute('aria-label', kitName + ' added to your garden plan');
+            planCount.textContent = String(plans.size);
+            planCount.animate([{ transform: 'scale(.7)' }, { transform: 'scale(1.3)' }, { transform: 'scale(1)' }], { duration: 350, easing: 'ease-out' });
+          }
+        });
+      });
+
+      const dialog = document.getElementById('shapeDialog');
+      const dialogIcon = document.getElementById('dialogIcon');
+      const dialogEyebrow = document.getElementById('dialogEyebrow');
+      const dialogTitle = document.getElementById('dialogTitle');
+      const dialogText = document.getElementById('dialogText');
+      const dialogList = document.getElementById('dialogList');
+      const shapeData = {
+        heart: {
+          eyebrow: 'Sweet & simple',
+          title: 'Heart strawberries',
+          text: 'A lovely first project: strawberries are compact, familiar, and full of charm when given a gentle heart-shaped guide.',
+          points: ['Best in a sunny pot or border', 'Fit the guide once fruit has set', 'Plan a small celebration for early summer'],
+          icon: '<svg viewBox="0 0 160 155"><path d="M80 141C53 119 17 94 14 58 10 27 34 13 56 23c11 5 19 15 24 25 5-10 13-20 24-25 22-10 46 4 42 35-4 36-40 61-66 83Z" fill="#ef6a50"/><path d="M79 48C75 34 65 24 51 19c14-5 25 1 30 12 7-11 18-15 32-11-14 8-22 17-25 30-3-2-6-2-9-2Z" fill="#3f8855"/><g fill="#ffd3c4"><circle cx="55" cy="65" r="2.5"/><circle cx="75" cy="75" r="2.5"/><circle cx="103" cy="67" r="2.5"/><circle cx="64" cy="96" r="2.5"/><circle cx="90" cy="106" r="2.5"/></g></svg>',
+          color: '#ffd6cb'
+        },
+        star: {
+          eyebrow: 'Crisp & curious',
+          title: 'Star cucumbers',
+          text: 'A quick and playful grow for anyone who loves fresh crunch and the thrill of a just-picked surprise.',
+          points: ['A sunny raised bed is ideal', 'Check your fruit every few days', 'Wonderful sliced into a summer salad'],
+          icon: '<svg viewBox="0 0 160 155"><path d="m80 14 18 46 48 2-37 30 13 48-42-29-42 29 13-48-37-30 48-2 18-46Z" fill="#6da956"/><path d="m80 14 7 18M98 60l19 2M109 92l14 17M80 111v20M51 92l-14 17M62 60l-19 2" fill="none" stroke="#c9e58d" stroke-width="7" stroke-linecap="round"/></svg>',
+          color: '#d8edd1'
+        },
+        cube: {
+          eyebrow: 'Bold & patient',
+          title: 'Square watermelons',
+          text: 'A bigger, slower garden project for growers who enjoy the journey as much as the remarkable final harvest.',
+          points: ['Give vines space and steady warmth', 'Use only on a strong, healthy fruit', 'Harvest at full ripeness for the best reveal'],
+          icon: '<svg viewBox="0 0 160 155"><path d="m35 45 45-26 45 26v52l-45 26-45-26V45Z" fill="#74a94f"/><path d="m35 45 45 26 45-26M80 71v52" fill="none" stroke="#d5e99f" stroke-width="6" stroke-linejoin="round"/><circle cx="59" cy="57" r="2.5" fill="#f7e9ad"/><circle cx="88" cy="48" r="2.5" fill="#f7e9ad"/><circle cx="102" cy="73" r="2.5" fill="#f7e9ad"/></svg>',
+          color: '#f8e6a2'
+        }
+      };
+      document.querySelectorAll('.shape-detail').forEach(function (button) {
+        button.addEventListener('click', function () {
+          const data = shapeData[button.dataset.shape];
+          dialogIcon.innerHTML = data.icon;
+          dialogIcon.style.background = data.color;
+          dialogEyebrow.textContent = data.eyebrow;
+          dialogTitle.textContent = data.title;
+          dialogText.textContent = data.text;
+          dialogList.innerHTML = data.points.map(function (point) { return '<li>' + point + '</li>'; }).join('');
+          dialog.showModal();
+        });
+      });
+      document.getElementById('dialogClose').addEventListener('click', function () { dialog.close(); });
+      dialog.addEventListener('click', function (event) {
+        const rect = dialog.getBoundingClientRect();
+        const clickedOutside = event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom;
+        if (clickedOutside) dialog.close();
+      });
+
+      const form = document.getElementById('emailForm');
+      const email = document.getElementById('email');
+      const formMessage = document.getElementById('formMessage');
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        if (!email.validity.valid) {
+          formMessage.textContent = 'Please enter a valid email address so we know where to send the garden notes.';
+          email.focus();
+          return;
+        }
+        formMessage.textContent = 'You are on the list — your first growing note is on its way.';
+        form.reset();
+      });
+
+      document.getElementById('year').textContent = new Date().getFullYear();
+      if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: .12 });
+        document.querySelectorAll('.reveal').forEach(function (element) { observer.observe(element); });
+      } else {
+        document.querySelectorAll('.reveal').forEach(function (element) { element.classList.add('is-visible'); });
+      }
+    }());
+  </script>
+</body>
+</html>
